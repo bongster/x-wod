@@ -1,9 +1,17 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { createBottomTabNavigator } from 'react-navigation';
 
 
 class HomeScreen extends React.Component {
+  static navigationOptions = {
+    tabBarIcon: ({ focused, tintColor }) => {
+      let iconName = 'ios-information-circle';
+      return <Ionicons name={iconName} size={25} color={tintColor} />;
+    },
+  }
+  
   render() {
     return (
       <View style={styles.container}>
@@ -34,6 +42,13 @@ class HomeScreen extends React.Component {
 }
 
 class TimerScreen extends React.Component {
+  static navigationOptions = {
+    tabBarIcon: ({ focused, tintColor }) => {
+      let iconName = 'ios-time';
+      return <Ionicons name={iconName} size={25} color={tintColor} />;
+    },
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -44,6 +59,13 @@ class TimerScreen extends React.Component {
 }
 
 class WODScreen extends React.Component {
+  static navigationOptions = {
+    tabBarIcon: ({ focused, tintColor }) => {
+      let iconName = 'ios-body';
+      return <Ionicons name={iconName} size={25} color={tintColor} />;
+    },
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -54,6 +76,13 @@ class WODScreen extends React.Component {
 }
 
 class RecordScreen extends React.Component {
+  static navigationOptions = {
+    tabBarIcon: ({ focused, tintColor }) => {
+      let iconName = 'ios-clipboard';
+      return <Ionicons name={iconName} size={25} color={tintColor} />;
+    },
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -64,6 +93,13 @@ class RecordScreen extends React.Component {
 }
 
 class HistoryScreen extends React.Component {
+  static navigationOptions = {
+    tabBarIcon: ({ focused, tintColor }) => {
+      let iconName = 'ios-filing';
+      return <Ionicons name={iconName} size={25} color={tintColor} />;
+    },
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -74,15 +110,27 @@ class HistoryScreen extends React.Component {
 }
 
 
-const App = createStackNavigator(
+const App = createBottomTabNavigator(
   {
-    HomeScreen: { screen: HomeScreen, navigationOptions: {
-      title: 'Welcome',
-    } },
+    HomeScreen: { screen: HomeScreen },
     TimerScreen: { screen: TimerScreen },
     WODScreen: { screen: WODScreen },
     RecordScreen: { screen: RecordScreen },
     HistoryScreen: { screen: HistoryScreen },
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, tintColor }) => {
+        let iconName = `${navigation.iconName ? navigation.iconName: 'ios-help'}${focused ? '' : '-outline'}`;
+        // You can return any component that you like here! We usually use an
+        // icon component from react-native-vector-icons
+        return <Ionicons name={iconName} size={25} color={tintColor} />;
+      },
+    }),
+    tabBarOptions: {
+      activeTintColor: 'tomato',
+      inactiveTintColor: 'gray',
+    }
   },
   {
     initialRouteName: 'HomeScreen',
