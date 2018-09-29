@@ -1,8 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import {
+  Button,
+  Text,
+  View,
+} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from 'react-navigation';
-
+import { TimerStack } from './components/timer'
+import { styles } from './styles'
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -38,23 +43,6 @@ class HomeScreen extends React.Component {
         />
       </View>
     );
-  }
-}
-
-class TimerScreen extends React.Component {
-  static navigationOptions = {
-    tabBarIcon: ({ focused, tintColor }) => {
-      let iconName = 'ios-time';
-      return <Ionicons name={iconName} size={25} color={tintColor} />;
-    },
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>This is TimerScreen</Text>
-      </View>
-    )
   }
 }
 
@@ -109,11 +97,20 @@ class HistoryScreen extends React.Component {
   }
 }
 
-
 const App = createBottomTabNavigator(
   {
     HomeScreen: { screen: HomeScreen },
-    TimerScreen: { screen: TimerScreen },
+    TimerScreen: {
+      screen: TimerStack,
+      navigationOptions: ({ navigation }) => ({
+        tabBarIcon: ({ focused, tintColor }) => {
+          let iconName = `ios-time${focused ? '' : '-outline'}`;
+          // You can return any component that you like here! We usually use an
+          // icon component from react-native-vector-icons
+          return <Ionicons name={iconName} size={25} color={tintColor} />;
+        },
+      })
+    },
     WODScreen: { screen: WODScreen },
     RecordScreen: { screen: RecordScreen },
     HistoryScreen: { screen: HistoryScreen },
@@ -128,22 +125,12 @@ const App = createBottomTabNavigator(
       },
     }),
     tabBarOptions: {
+      showLabel: false,
       activeTintColor: 'tomato',
       inactiveTintColor: 'gray',
-    }
-  },
-  {
-    initialRouteName: 'HomeScreen',
+    },
+    initialRouteName: 'TimerScreen',
   }
 )
 
 export default App;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
