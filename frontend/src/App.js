@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import Home from './components/Home';
 import WOD from './components/WOD';
+import Record from './components/Record';
+import Records from './components/Records';
 
 function App() {
   return (
@@ -40,7 +42,9 @@ function App() {
       </header>
       <main role="main">
         {/* <Home></Home> */}
-        <WOD></WOD>
+        {/* <WOD></WOD> */}
+        {/* <Record></Record> */}
+        <Records></Records>
 
       </main>
       <footer className="text-muted">
