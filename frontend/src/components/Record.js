@@ -23,12 +23,12 @@ export class Record extends Component {
         <div className="container">
           <div className="py-5 text-center">
             <img className="d-block mx-auto mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72" />
-            <h2>Checkout form</h2>
-            <p className="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+            <h2>Regist My Record</h2>
+            <p className="lead">Example Wod detail blah blah</p>
           </div>
           <div className="row">
             <div className="col-md-12 order-md-1">
-              <h4 className="mb-3">Billing address</h4>
+              <h4 className="mb-3">WOD</h4>
               <form className="needs-validation was-validated" noValidate onSubmit={this.handleSubmit}>
                 <div className="row">
                   <div className="col-md-6 mb-3">

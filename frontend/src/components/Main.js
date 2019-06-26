@@ -1,14 +1,38 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+
 import './Main.css';
+import Layout from './layouts';
+
+import Login from './Login';
 import Home from './Home';
 import WOD from './WOD';
 import Record from './Record';
 import Records from './Records';
 
+function PrivateRoute({ component: Component, authed, ...rest }) {
+  console.log(authed)
+  return (
+    <Route
+      {...rest}
+      render={(props) => authed
+        ? <Component {...props} />
+        : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />}
+    />
+  )
+}
+
 function Main() {
+  const auth = window.localStorage.getItem('auth')
+  console.log(auth)
+  let authed = false;
+  if (auth) {
+    const pasedAuth = JSON.parse(auth)
+    authed = pasedAuth.email === "bongster88@gmail.com"
+  }
   return (
     <div>
-      <header>
+      {/* <header>
         <div className="collapse bg-dark" id="navbarHeader">
           <div className="container">
             <div className="row">
@@ -38,23 +62,14 @@ function Main() {
             </button>
           </div>
         </div>
-      </header>
-      <main role="main">
-        {/* <Home></Home> */}
-        <WOD></WOD>
-        {/* <Record></Record> */}
-        {/* <Records></Records> */}
-
-      </main>
-      <footer className="text-muted">
-        <div className="container">
-          <p className="float-right">
-            <a href="#">Back to top</a>
-          </p>
-          <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
-          <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="/docs/4.3/getting-started/introduction/">getting started guide</a>.</p>
-        </div>
-      </footer>
+      </header> */}
+      <Layout>
+        <Route path="/" exact component={Home}></Route>
+        <Route path="/login" component={Login}></Route>
+        <PrivateRoute authed={authed} path="/wods" component={WOD}></PrivateRoute>
+        <PrivateRoute authed={authed} path="/records" component={Records}></PrivateRoute>
+        <PrivateRoute authed={authed} path="/record" component={Record}></PrivateRoute>
+      </Layout>
     </div>
   );
 }
