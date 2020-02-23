@@ -13,7 +13,8 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.1.2",
-    "simpl-schema": "^1.5.7"
+    "simpl-schema": "^1.5.7",
+    "styled-components": "^5.0.1"
   },
   "meteor": {
     "mainModule": {
