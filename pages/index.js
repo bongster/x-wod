@@ -16,6 +16,7 @@ export default function Home({ allPostsData }) {
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
       </Head>
       <Container>
+        <a href="/api/auth/google">Sign In with Google</a>
         <Card />
         <Card />
         <Card />
