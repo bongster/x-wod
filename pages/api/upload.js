@@ -20,17 +20,24 @@ export default async (req, res) => {
     res.send(new Error("have to set $CLOUDINARY_URL env"));
     return;
   }
-  console.log(process.env.CLOUDINARY_URL);
+  if (req.method !== "POST") {
+    res.status(405).send(new Error("Not supported method type"));
+    return
+  }
   const Uploader = upload.single("file");
   Uploader(req, res, err => {
+    if (err) {
+      res.status(400).send(err)
+      return
+    }
     const uniqueFilename = new Date().toISOString();
-    Cloudinary.uploader.upload(req.file.path, { 
+    Cloudinary.uploader.upload(req.file.path, {
       public_id: `image/${uniqueFilename}`,
-      "crop": "limit", 
-      "tags": "image", 
-      "width": 250, 
-      "height": 250,
-    }, function (err, image) { 
+      "crop": "limit",
+      "tags": "image",
+      "width": 400,
+      "height": 300,
+    }, function (err, image) {
       if (err)
         res.send(err)
       res.status(200).json({ url: image.secure_url });
