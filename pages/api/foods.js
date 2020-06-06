@@ -33,10 +33,8 @@ export default async (req, res) => {
     switch (req.method.toUpperCase()) {
       case "GET":
         return res.json(await foodModel.find().exec());
-        break;
       case "POST":
         return res.json(await foodModel.create(req.body));
-        break;
       default:
         return res.status(405).send(new Error(`Not supported method type: ${req.method}`))
         break;
@@ -44,5 +42,4 @@ export default async (req, res) => {
   } catch (e) {
     res.status(500).send(e)
   }
-
 }
