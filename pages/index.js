@@ -1,36 +1,22 @@
 import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
-import utilStyles from '../styles/utils.module.css'
-import { getSortedPostsData } from '../lib/posts'
-import Link from 'next/link'
-import Date from '../components/date'
 import Container from '@material-ui/core/Container';
+import { ThemeProvider } from '@material-ui/core/styles';
 import Card from "../components/Card"
+import theme from "../theme";
 
-export default function Home({ allPostsData }) {
+export default function Home({ }) {
   return (
-    <Layout home>
-      <Head>
-        <title>{siteTitle}</title>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-      </Head>
-      <Container>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-      </Container>
-    </Layout>
+    <ThemeProvider theme={theme}>
+      <Layout home>
+        <Head>
+          <title>{siteTitle}</title>
+        </Head>
+        <Container>
+          <a href="/api/auth/google">Sign In with Google</a>
+          <Card />
+        </Container>
+      </Layout>
+    </ThemeProvider>
   )
-}
-
-export async function getStaticProps() {
-  const allPostsData = getSortedPostsData()
-  return {
-    props: {
-      allPostsData
-    }
-  }
 }
