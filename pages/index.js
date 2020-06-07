@@ -4,8 +4,9 @@ import Container from '@material-ui/core/Container';
 import { ThemeProvider } from '@material-ui/core/styles';
 import Card from "../components/Card"
 import theme from "../theme";
+import cookies from "next-cookies"
 
-export default function Home({ }) {
+export default function Home({ token, profile }) {
   return (
     <ThemeProvider theme={theme}>
       <Layout home>
@@ -13,10 +14,20 @@ export default function Home({ }) {
           <title>{siteTitle}</title>
         </Head>
         <Container>
+          {token} {profile.displayName}
           <a href="/api/auth/google">Sign In with Google</a>
           <Card />
         </Container>
       </Layout>
     </ThemeProvider>
   )
+}
+
+Home.getInitialProps = async (ctx) => {
+  const allCookies = cookies(ctx);
+  const {token, profile } = allCookies;
+  return {
+    token,
+    profile,
+  }
 }
