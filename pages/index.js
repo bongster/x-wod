@@ -14,7 +14,7 @@ export default function Home({ token, profile }) {
           <title>{siteTitle}</title>
         </Head>
         <Container>
-          {token} {profile.displayName}
+          {token} {profile && profile.displayName}
           <a href="/api/auth/google">Sign In with Google</a>
           <Card />
         </Container>
