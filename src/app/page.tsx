@@ -2,7 +2,8 @@
 
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, BellIcon, XMarkIcon, ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline'
+import { signIn, useSession } from "next-auth/react"
 
 const user = {
   name: 'Tom Cook',
@@ -28,6 +29,7 @@ function classNames(...classes) {
 }
 
 export default function Example() {
+  const { data: session } = useSession()
   return (
     <>
       {/*
@@ -74,6 +76,15 @@ export default function Example() {
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
+                      <button
+                        type="button"
+                        className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                        onClick={() => signIn()}
+                      >
+                        <span className="absolute -inset-1.5" />
+                        <span className="sr-only">View notifications</span>
+                        <ArrowRightOnRectangleIcon className="h-6 w-6" aria-hidden="true"/>
+                      </button>
                       <button
                         type="button"
                         className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -172,6 +183,7 @@ export default function Example() {
                       <BellIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
                   </div>
+                  <div className="mt-3 space-y-1 px-2"></div>
                   <div className="mt-3 space-y-1 px-2">
                     {userNavigation.map((item) => (
                       <Disclosure.Button
@@ -192,7 +204,7 @@ export default function Example() {
 
         <header className="bg-white shadow">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900">Dashboard {JSON.stringify(session, null, 2)}</h1>
           </div>
         </header>
         <main>
