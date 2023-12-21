@@ -13,7 +13,7 @@ const user = {
 }
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
+  { name: 'Workout', href: '/workouts', current: false },
   { name: 'Projects', href: '#', current: false },
   { name: 'Calendar', href: '#', current: false },
   { name: 'Reports', href: '#', current: false },
@@ -83,7 +83,7 @@ export default function Example() {
                       >
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">View notifications</span>
-                        <ArrowRightOnRectangleIcon className="h-6 w-6" aria-hidden="true"/>
+                        <ArrowRightOnRectangleIcon className="h-6 w-6" aria-hidden="true" />
                       </button>
                       <button
                         type="button"
